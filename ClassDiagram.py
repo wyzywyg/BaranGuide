@@ -1,19 +1,12 @@
 import json
-from datetime import date
+from datetime import datetime
 from enum import Enum
 
-
-
-
-# ----- Enums -----
 class ComplaintStatus(Enum):
     PENDING = "Pending"
-    IN_PROGRESS = "In Progress"
+    IN_PROGRESS = "InProgress"
     RESOLVED = "Resolved"
     ESCALATED = "Escalated"
-
-
-
 
 class UrgencyLevel(Enum):
     LOW = "Low"
@@ -21,108 +14,97 @@ class UrgencyLevel(Enum):
     HIGH = "High"
     CRITICAL = "Critical"
 
-
-
-
 class SatisfactionLevel(Enum):
     SATISFIED = "Satisfied"
     NEUTRAL = "Neutral"
     UNSATISFIED = "Unsatisfied"
 
-
-
-
-# ----- Helper Functions -----
-def custom_serializer(obj):
-    """Convert objects to JSON-serializable format"""
-    if isinstance(obj, (Enum, date)):
-        return obj.value if isinstance(obj, Enum) else obj.isoformat()
-    return obj.__dict__
-
-
-
-
-def generate_id(cls):
-    """Generic ID generator for any class"""
-    if not hasattr(cls, "_id_counter"):
-        cls._id_counter = 1
-    id_value = cls._id_counter
-    cls._id_counter += 1
-    return id_value
-
-
-
-
-# ----- User Classes -----
 class User:
-    def __init__(self, userID, name, contactInfo, email, password):
-        self.userID = userID
+    def __init__(self, user_id, name, contact_info, email, password):
+        self.user_id = user_id
         self.name = name
-        self.contactInfo = contactInfo
+        self.contact_info = contact_info
         self.email = email
-        self.password = password  # Should be hashed in production
+        self.password = password
 
+    def authenticate(self):
+        return True  # Placeholder for authentication logic
 
-
+    def update_profile(self, new_info):
+        self.__dict__.update(new_info)
 
 class Resident(User):
     def submit_complaint(self, title, description, category, urgency):
-        return Complaint(title, description, category, urgency, self.userID)
+        return Complaint(title, description, category, urgency)
 
+class MunicipalOfficial(User):
+    def handle_escalated_complaint(self, complaint):
+        complaint.status = ComplaintStatus.ESCALATED
 
+class BarangayCaptain(User):
+    def escalate_complaint(self, complaint):
+        complaint.status = ComplaintStatus.ESCALATED
 
+class BarangayOfficer(User):
+    def review_complaint(self, complaint):
+        complaint.status = ComplaintStatus.IN_PROGRESS
 
-# ----- Complaint System -----
 class Complaint:
-    def __init__(self, title, description, category, urgency, resident_id):
-        self.complaintID = generate_id(Complaint)
+    def __init__(self, title, description, category, urgency):
+        self.complaint_id = id(self)
         self.title = title
         self.description = description
         self.category = category
-        self.urgencyLevel = urgency
-        self.dateSubmitted = date.today()
+        self.date_submitted = datetime.now().isoformat()
         self.status = ComplaintStatus.PENDING
-        self.feedbacks = []
-        self.residentID = resident_id
-
+        self.urgency_level = urgency
+        self.estimated_resolution_time = None
 
     def update_status(self, status):
         self.status = status
 
-
     def escalate(self):
         self.status = ComplaintStatus.ESCALATED
 
+class Attachment:
+    def __init__(self, file_name, file_type, file_size):
+        self.attachment_id = id(self)
+        self.file_name = file_name
+        self.file_type = file_type
+        self.file_size = file_size
+        self.upload_date = datetime.now().isoformat()
 
-    def add_feedback(self, feedback):
-        self.feedbacks.append(feedback)
-
-
-
-
-# ----- Feedback -----
 class Feedback:
-    def __init__(self, rating, comment, satisfaction):
-        self.feedbackID = generate_id(Feedback)
+    def __init__(self, rating, comment, satisfaction_level):
+        self.feedback_id = id(self)
         self.rating = rating
         self.comment = comment
-        self.dateSubmitted = date.today()
-        self.satisfactionLevel = satisfaction
+        self.date_submitted = datetime.now().isoformat()
+        self.satisfaction_level = satisfaction_level
 
+class Notification:
+    def __init__(self, content, notification_type):
+        self.notification_id = id(self)
+        self.content = content
+        self.timestamp = datetime.now().isoformat()
+        self.is_read = False
+        self.type = notification_type
 
+    def mark_as_read(self):
+        self.is_read = True
 
+class Message:
+    def __init__(self, sender, receiver, content):
+        self.message_id = id(self)
+        self.content = content
+        self.timestamp = datetime.now().isoformat()
+        self.sender = sender
+        self.receiver = receiver
 
-# ----- Example Usage -----
-if __name__ == "__main__":
-    resident = Resident(1, "John Doe", "123-456-789", "john@example.com", "password123")
-    complaint = resident.submit_complaint("Noise Complaint", "Loud music at night", "Noise", UrgencyLevel.HIGH)
-   
-    feedback = Feedback(4, "Resolved, but took too long", SatisfactionLevel.NEUTRAL)
-    complaint.add_feedback(feedback)
+    def send(self):
+        return True  # Placeholder for send logic
 
-
-    print("Complaint:", json.dumps(complaint, default=custom_serializer, indent=4))
-    print("\nFeedback:", json.dumps(feedback, default=custom_serializer, indent=4))
-
-
-
+# Example Usage:
+resident = Resident(1, "John Doe", "123456789", "john@example.com", "password")
+complaint = resident.submit_complaint("Noise Complaint", "Loud music at night", "Noise", UrgencyLevel.HIGH)
+print(json.dumps(complaint.__dict__, indent=4, default=str))

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaranGuide - Login/Signup</title>
+    <link rel="stylesheet" href="Loginstyles.css">
+</head>
+<body>
+    <a href="Homepage.html" class="back-link">
+        <span>←</span> Back to Home
+    </a>
+
+    <div class="logo">
+        <span class="logo-icon">🏙️</span>
+        <span>BaranGuide</span>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-sidebar" id="login-sidebar">
+            <h2>Welcome to BaranGuide</h2>
+            <p>Join our Barangay Community Complaint Management System (BCCMS) to simplify community complaint management in your barangay.</p>
+            <h3 style="margin-bottom: 1rem;">What You Can Do:</h3>
+            <ul>
+                <li>Submit and track community complaints with real-time updates</li>
+                <li>Upload evidence to support your community concerns</li>
+                <li>Get estimated resolution times based on complaint urgency</li>
+                <li>Communicate directly with barangay officials</li>
+                <li>Provide feedback on complaint resolutions</li>
+                <li>Help build a better community together</li>
+            </ul>
+            <p>Supporting:</p>
+            <div>
+                <span class="tag">SDG 11: Sustainable Cities</span>
+                <span class="tag">SDG 16: Peace & Justice</span>
+            </div>
+        </div>
+
+        <div class="auth-sidebar" id="signup-sidebar" style="display:none;">
+            <h2>Join BaranGuide Today</h2>
+            <p>The Barangay Community Complaint Management System (BCCMS) is a digital platform designed to simplify and optimize the submission, tracking, and resolution of community complaints.</p>
+            
+            <h3 style="margin: 1rem 0;">Key Benefits:</h3>
+            <ul>
+                <li>Submit complaints with supporting evidence (photos/videos)</li>
+                <li>Track your complaints with unique tracking IDs</li>
+                <li>Receive real-time status updates at every stage</li>
+                <li>Get estimated resolution times based on urgency</li>
+                <li>Communicate directly with barangay officials</li>
+                <li>Rate your satisfaction after issue resolution</li>
+                <li>Request further action if issues remain unresolved</li>
+                <li>Enhance transparency in local governance</li>
+                <li>Contribute to more sustainable communities</li>
+            </ul>
+
+            <h3 style="margin: 1rem 0;">Aligns With:</h3>
+            <p>SDG 11: Sustainable Cities and Communities - Empowering citizen participation in local governance and enhancing urban management.</p>
+            <p>SDG 16: Peace, Justice and Strong Institutions - Building trust in local institutions and facilitating inclusive decision-making.</p>
+        </div>
+
+        <div class="auth-content">
+            <div class="tab-container">
+                <div class="tab active" id="login-tab">Login</div>
+                <div class="tab" id="signup-tab">Sign Up</div>
+            </div>
+
+            <div class="form-container active" id="login-form">
+                <form action="#" method="POST" id="login-form-element">
+                    <div class="role-selector">
+                        <div class="role-option active" data-role="resident">
+                            <div class="icon">👨‍👩‍👧‍👦</div>
+                            <h3>Resident</h3>
+                        </div>
+                        <div class="role-option" data-role="officer">
+                            <div class="icon">👮</div>
+                            <h3>Barangay Officer</h3>
+                        </div>
+                        <div class="role-option" data-role="captain">
+                            <div class="icon">👨‍💼</div>
+                            <h3>Barangay Captain</h3>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required placeholder="Enter your password">
+                        <div class="error-message" id="login-error"></div>
+                    </div>
+                    <div class="remember-forgot">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <a href="#" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                    <div class="form-footer">
+                        Don't have an account? <a id="switch-to-signup">Sign up</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-container" id="signup-form">
+                <form action="#" method="POST" id="signup-form-element">
+                    <div class="role-selector">
+                        <div class="role-option active" data-role="resident">
+                            <div class="icon">👨‍👩‍👧‍👦</div>
+                            <h3>Resident</h3>
+                        </div>
+                        <div class="role-option" data-role="officer">
+                            <div class="icon">👮</div>
+                            <h3>Barangay Officer</h3>
+                        </div>
+                        <div class="role-option" data-role="captain">
+                            <div class="icon">👨‍💼</div>
+                            <h3>Barangay Captain</h3>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" name="fullName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" name="password" required placeholder="Create a password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" required placeholder="Confirm your password">
+                        <div class="error-message" id="signup-error"></div>
+                    </div>
+                    <button type="submit" class="btn">Sign Up</button>
+                    <div class="form-footer">
+                        Already have an account? <a id="switch-to-login">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginTab = document.getElementById('login-tab');
+            const signupTab = document.getElementById('signup-tab');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const switchToSignup = document.getElementById('switch-to-signup');
+            const switchToLogin = document.getElementById('switch-to-login');
+            const loginFormElement = document.getElementById('login-form-element');
+            const signupFormElement = document.getElementById('signup-form-element');
+            const loginError = document.getElementById('login-error');
+            const signupError = document.getElementById('signup-error');
+            const loginSidebar = document.getElementById('login-sidebar');
+            const signupSidebar = document.getElementById('signup-sidebar');
+
+            // Initialize role selection
+            loginFormElement.dataset.role = 'resident';
+            signupFormElement.dataset.role = 'resident';
+
+            // Switch to signup tab with animation
+            function showSignup() {
+                loginTab.classList.remove('active');
+                signupTab.classList.add('active');
+                loginForm.classList.remove('active');
+                loginSidebar.style.display = 'none';
+                signupSidebar.style.display = 'block';
+                setTimeout(() => {
+                    signupForm.classList.add('active');
+                }, 50);
+            }
+
+            // Switch to login tab with animation
+            function showLogin() {
+                signupTab.classList.remove('active');
+                loginTab.classList.add('active');
+                signupForm.classList.remove('active');
+                signupSidebar.style.display = 'none';
+                loginSidebar.style.display = 'block';
+                setTimeout(() => {
+                    loginForm.classList.add('active');
+                }, 50);
+            }
+
+            // Role selection functionality
+            function selectRole(roleOptions, clickedOption) {
+                // Remove active class from all role options
+                roleOptions.forEach(option => {
+                    option.classList.remove('active');
+                });
+                
+                // Add active class to the clicked option
+                clickedOption.classList.add('active');
+                
+                // Store the selected role in the form's dataset
+                const formElement = clickedOption.closest('form');
+                if (formElement) {
+                    formElement.dataset.role = clickedOption.dataset.role;
+                }
+            }
+
+            // Add event listeners for tab switching
+            loginTab.addEventListener('click', showLogin);
+            signupTab.addEventListener('click', showSignup);
+            switchToSignup.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSignup();
+            });
+            switchToLogin.addEventListener('click', function(e) {
+                e.preventDefault();
+                showLogin();
+            });
+
+            // Add event listeners for role selection in both forms
+            const loginRoleOptions = loginForm.querySelectorAll('.role-option');
+            const signupRoleOptions = signupForm.querySelectorAll('.role-option');
+
+            loginRoleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    selectRole(loginRoleOptions, this);
+                });
+            });
+
+            signupRoleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    selectRole(signupRoleOptions, this);
+                });
+            });
+
+            // Form validation functions
+            function validateEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+
+            function validatePassword(password) {
+                return password.length >= 8; // Simple length check
+            }
+
+            // Form submission handlers
+            loginFormElement.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                const role = this.dataset.role || 'resident'; // Default to resident
+                
+                // Basic validation
+                if (!validateEmail(email)) {
+                    loginError.style.display = 'block';
+                    loginError.textContent = 'Please enter a valid email address';
+                    return;
+                }
+                
+                console.log('Login attempt:', { email, role });
+                
+                // For demonstration
+                alert(`Login successful as ${role}! Redirecting to dashboard...`);
+                // window.location.href = 'dashboard.html';
+            });
+            
+            signupFormElement.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const fullName = document.getElementById('full-name').value;
+                const email = document.getElementById('signup-email').value;
+                const phone = document.getElementById('phone').value;
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                const role = this.dataset.role || 'resident'; // Default to resident
+                
+                // Reset error message
+                signupError.style.display = 'none';
+                
+                // Basic validation
+                if (fullName.trim() === '') {
+                    signupError.style.display = 'block';
+                    signupError.textContent = 'Please enter your full name';
+                    return;
+                }
+                
+                if (!validateEmail(email)) {
+                    signupError.style.display = 'block';
+                    signupError.textContent = 'Please enter a valid email address';
+                    return;
+                }
+                
+                if (!validatePassword(password)) {
+                    signupError.style.display = 'block';
+                    signupError.textContent = 'Password must be at least 8 characters long';
+                    return;
+                }
+                
+                // Check password matching
+                if (password !== confirmPassword) {
+                    signupError.style.display = 'block';
+                    signupError.textContent = 'Passwords do not match!';
+                    return;
+                }
+                
+                console.log('Signup attempt:', { fullName, email, phone, role });
+                
+                // For demonstration
+                alert('Account created successfully! Please login with your credentials.');
+                showLogin();
+            });
+
+            // Clear error messages when inputs change
+            document.getElementById('login-email').addEventListener('input', function() {
+                loginError.style.display = 'none';
+            });
+            
+            document.getElementById('login-password').addEventListener('input', function() {
+                loginError.style.display = 'none';
+            });
+            
+            document.getElementById('signup-email').addEventListener('input', function() {
+                signupError.style.display = 'none';
+            });
+            
+            document.getElementById('signup-password').addEventListener('input', function() {
+                signupError.style.display = 'none';
+            });
+            
+            document.getElementById('confirm-password').addEventListener('input', function() {
+                signupError.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

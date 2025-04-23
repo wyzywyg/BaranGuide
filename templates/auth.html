@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaranGuide - Login/Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body>
+    <a href="{{ url_for('home') }}" class="back-link">
+        <span>←</span> Back to Home
+    </a>
+
+    <div class="logo">
+        <span class="logo-icon">🏙️</span>
+        <span>BaranGuide</span>
+    </div>
+
+    <div class="auth-container">
+        <!-- Login Sidebar -->
+        <div class="auth-sidebar" id="login-sidebar" {% if form_type != 'login' %}style="display:none;"{% endif %}>
+            <h2>Welcome to BaranGuide</h2>
+            <p>Join our Barangay Community Complaint Management System to simplify community issues in your area.</p>
+            <div class="sidebar-benefits">
+                <div class="benefit-item">
+                    <span class="benefit-icon">📝</span>
+                    <span>Submit & track complaints</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🔔</span>
+                    <span>Get real-time updates</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">💬</span>
+                    <span>Direct communication</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">⭐</span>
+                    <span>Provide feedback</span>
+                </div>
+            </div>
+            <div class="sdg-tags">
+                <span class="tag">SDG 11: Sustainable Cities</span>
+                <span class="tag">SDG 16: Peace & Justice</span>
+            </div>
+        </div>
+
+        <!-- Signup Sidebar -->
+        <div class="auth-sidebar" id="signup-sidebar" {% if form_type != 'signup' %}style="display:none;"{% endif %}>
+            <h2>Join BaranGuide Today</h2>
+            <p>The Community Complaint Management System that connects residents with barangay officials.</p>
+            
+            <div class="sidebar-benefits">
+                <div class="benefit-item">
+                    <span class="benefit-icon">📷</span>
+                    <span>Submit evidence</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🔍</span>
+                    <span>Track with unique IDs</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">⏱️</span>
+                    <span>Get resolution estimates</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🔄</span>
+                    <span>Request further actions</span>
+                </div>
+            </div>
+            
+            <div class="sdg-tags">
+                <span class="tag">SDG 11: Sustainable Cities</span>
+                <span class="tag">SDG 16: Peace & Justice</span>
+            </div>
+        </div>
+
+        <div class="auth-content">
+            <div class="tab-container">
+                <div class="tab {% if form_type == 'login' %}active{% endif %}" id="login-tab">Login</div>
+                <div class="tab {% if form_type == 'signup' %}active{% endif %}" id="signup-tab">Sign Up</div>
+            </div>
+
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Login Form -->
+            <div class="form-container {% if form_type == 'login' %}active{% endif %}" id="login-form">
+                <form action="{{ url_for('auth.login') }}" method="POST" id="login-form-element">
+                    <input type="hidden" name="role" id="login-role" value="resident">
+                    
+                    <div class="role-selector">
+                        <div class="role-option active" data-role="resident">
+                            <div class="icon">👨‍👩‍👧‍👦</div>
+                            <h3>Resident</h3>
+                        </div>
+                        <div class="role-option" data-role="official">
+                            <div class="icon">👮</div>
+                            <h3>Barangay Official</h3>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required placeholder="Enter your password">
+                        <div class="error-message" id="login-error"></div>
+                    </div>
+                    <div class="remember-forgot">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                    <div class="form-footer">
+                        Don't have an account? <a id="switch-to-signup">Sign up</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="form-container {% if form_type == 'signup' %}active{% endif %}" id="signup-form">
+                <form action="{{ url_for('auth.signup') }}" method="POST" id="signup-form-element">
+                    <input type="hidden" name="role" id="signup-role" value="resident">
+                    
+                    <div class="role-selector">
+                        <div class="role-option active" data-role="resident">
+                            <div class="icon">👨‍👩‍👧‍👦</div>
+                            <h3>Resident</h3>
+                        </div>
+                        <div class="role-option" data-role="official">
+                            <div class="icon">👮</div>
+                            <h3>Barangay Official</h3>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" name="fullName" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <input type="password" id="signup-password" name="password" required placeholder="Create a password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" name="confirmPassword" required placeholder="Confirm your password">
+                        </div>
+                    </div>
+                    <div class="error-message" id="signup-error"></div>
+                    
+                    <button type="submit" class="btn">Sign Up</button>
+                    <div class="form-footer">
+                        Already have an account? <a id="switch-to-login">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript remains the same as in your original code
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginTab = document.getElementById('login-tab');
+            const signupTab = document.getElementById('signup-tab');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const switchToSignup = document.getElementById('switch-to-signup');
+            const switchToLogin = document.getElementById('switch-to-login');
+            const loginFormElement = document.getElementById('login-form-element');
+            const signupFormElement = document.getElementById('signup-form-element');
+            const loginError = document.getElementById('login-error');
+            const signupError = document.getElementById('signup-error');
+            const loginSidebar = document.getElementById('login-sidebar');
+            const signupSidebar = document.getElementById('signup-sidebar');
+            const loginRoleInput = document.getElementById('login-role');
+            const signupRoleInput = document.getElementById('signup-role');
+
+            // Initialize role selection
+            loginFormElement.dataset.role = 'resident';
+            signupFormElement.dataset.role = 'resident';
+
+            // Switch to signup tab with animation
+            function showSignup() {
+                loginTab.classList.remove('active');
+                signupTab.classList.add('active');
+                loginForm.classList.remove('active');
+                loginSidebar.style.display = 'none';
+                signupSidebar.style.display = 'block';
+                setTimeout(() => {
+                    signupForm.classList.add('active');
+                }, 50);
+                
+                // Update URL without reload
+                history.pushState(null, '', '/signup');
+            }
+
+            // Switch to login tab with animation
+            function showLogin() {
+                signupTab.classList.remove('active');
+                loginTab.classList.add('active');
+                signupForm.classList.remove('active');
+                signupSidebar.style.display = 'none';
+                loginSidebar.style.display = 'block';
+                setTimeout(() => {
+                    loginForm.classList.add('active');
+                }, 50);
+                
+                // Update URL without reload
+                history.pushState(null, '', '/login');
+            }
+
+            // Role selection functionality
+            function selectRole(roleOptions, clickedOption) {
+                roleOptions.forEach(option => {
+                    option.classList.remove('active');
+                });
+                
+                clickedOption.classList.add('active');
+                
+                const formElement = clickedOption.closest('form');
+                if (formElement) {
+                    const role = clickedOption.dataset.role;
+                    formElement.dataset.role = role;
+                    
+                    // Update the hidden input
+                    if (formElement.id === 'login-form-element') {
+                        loginRoleInput.value = role;
+                    } else {
+                        signupRoleInput.value = role;
+                    }
+                }
+            }
+
+            // Add event listeners for tab switching
+            loginTab.addEventListener('click', showLogin);
+            signupTab.addEventListener('click', showSignup);
+            switchToSignup.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSignup();
+            });
+            switchToLogin.addEventListener('click', function(e) {
+                e.preventDefault();
+                showLogin();
+            });
+
+            // Add event listeners for role selection
+            const loginRoleOptions = loginForm.querySelectorAll('.role-option');
+            const signupRoleOptions = signupForm.querySelectorAll('.role-option');
+
+            loginRoleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    selectRole(loginRoleOptions, this);
+                });
+            });
+
+            signupRoleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    selectRole(signupRoleOptions, this);
+                });
+            });
+
+            // Client-side validation
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function validatePassword(password) {
+                return password.length >= 8;
+            }
+
+            // Clear error messages when inputs change
+            document.getElementById('login-email').addEventListener('input', function() {
+                loginError.style.display = 'none';
+            });
+            
+            document.getElementById('login-password').addEventListener('input', function() {
+                loginError.style.display = 'none';
+            });
+            
+            document.getElementById('signup-email').addEventListener('input', function() {
+                signupError.style.display = 'none';
+            });
+            
+            document.getElementById('signup-password').addEventListener('input', function() {
+                signupError.style.display = 'none';
+            });
+            
+            document.getElementById('confirm-password').addEventListener('input', function() {
+                signupError.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

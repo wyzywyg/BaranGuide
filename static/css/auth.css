@@ -1,0 +1,331 @@
+:root {
+    --primary: #1d4ed8;
+    --primary-light: #3b82f6;
+    --secondary: #65a30d;
+    --secondary-dark: #4d7c0f;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --gray: #94a3b8;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #0ea5e9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(rgba(29, 78, 216, 0.9), rgba(59, 130, 246, 0.85)), url('/api/placeholder/1200/800') no-repeat center center/cover;
+    color: var(--dark);
+    line-height: 1.5;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.back-link {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.4rem 0.8rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
+    font-size: 0.9rem;
+}
+
+.back-link span {
+    margin-right: 0.5rem;
+}
+
+.back-link:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.logo {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.logo-icon {
+    margin-right: 8px;
+    font-size: 2.2rem;
+}
+
+.auth-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    display: flex;
+    overflow: hidden;
+}
+
+.auth-sidebar {
+    background-color: var(--primary);
+    color: white;
+    padding: 2rem 1.5rem;
+    flex: 0.8;
+    display: none;
+}
+
+.auth-sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.auth-sidebar p {
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+.sidebar-benefits {
+    margin: 1.5rem 0;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.benefit-icon {
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.sdg-tags {
+    margin-top: 1.5rem;
+}
+
+.tag {
+    display: inline-block;
+    background-color: var(--secondary);
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.auth-content {
+    padding: 1.5rem;
+    flex: 1.2;
+}
+
+.tab-container {
+    display: flex;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--gray);
+}
+
+.tab {
+    padding: 0.8rem;
+    cursor: pointer;
+    position: relative;
+    font-weight: 600;
+    color: var(--gray);
+    transition: all 0.3s ease;
+}
+
+.tab.active {
+    color: var(--primary);
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--primary);
+}
+
+.form-container {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-container.active {
+    display: block;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    color: var(--dark);
+    font-size: 0.9rem;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.2);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: var(--primary-light);
+}
+
+.form-footer {
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.form-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Role selector styling */
+.role-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.2rem;
+}
+
+.role-option {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0.8rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.role-option.active {
+    border-color: var(--primary);
+    background-color: rgba(29, 78, 216, 0.05);
+}
+
+.role-option .icon {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+    color: var(--primary);
+}
+
+.role-option h3 {
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    font-size: 0.85rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input {
+    margin-right: 6px;
+}
+
+.forgot-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.error-message {
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .auth-sidebar {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .role-selector {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .auth-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
